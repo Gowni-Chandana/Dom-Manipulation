@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Manipulation</title>
+</head>
+<body>
+
+  <h1 id="mainTitle">Original Title</h1>
+  <p class="info">First paragraph</p>
+  <p class="info">Second paragraph</p>
+
+  <script>
+    // 6. Select by ID
+    const title = document.getElementById("mainTitle");
+
+    // 7. Select multiple elements by class name
+    const paragraphs = document.getElementsByClassName("info");
+
+    // OR using querySelectorAll
+    const allParagraphs = document.querySelectorAll(".info");
+
+    // 8. querySelector vs querySelectorAll
+    const firstParagraph = document.querySelector(".info"); // First match
+    const allPara = document.querySelectorAll(".info");     // All matches
+
+    // 9. Change text content
+    title

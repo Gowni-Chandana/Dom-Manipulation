@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Tasks</title>
+  <style>
+    .hoverDiv { width: 100px; height: 100px; background-color: lightblue; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body onload="showWelcomeMessage()">
+
+  <!-- 1. Change Input Text -->
+  <input type="text" id="inputText">
+  <p id="outputText"></p>
+
+  <hr>
+
+  <!-- 2. Button Click Counter -->
+  <button id="clickButton" onclick="countClicks()">Click me</button>
+  <p id="clickCount">0</p>
+
+  <hr>
+
+  <!-- 3. Hover Effect -->
+  <div class="hoverDiv" onmouseover="changeColor()" onmouseout="revertColor()"></div>
+
+  <hr>
+
+  <!-- 4. Live Key Logger -->
+  <input type="text" onkeydown="logKey(event)">
+
+  <hr>
+
+  <!-- 5. Image Loader -->
+  <img src="https://via.placeholder.com/150" onload="imageLoaded()">
+
+  <hr>
+
+  <!-- 6. Dropdown Menu Display -->
+  <select onchange="displaySelectedValue()">
+    <option value="Option 1">Option 1</option>
+    <option value="Option 2">Option 2</option>
+    <option value="Option 3">Option 3</option>
+  </select>
+  <p id="selectedValue"></p>
+
+  <hr>
+
+  <!-- 7. Toggle Box Visibility -->
+  <button onclick="toggleVisibility()">Toggle Box</button>
+  <div id="box" class="hidden">This is a box.</div>
+
+  <hr>
+
+  <!-- 8. Mouse Tracking -->
+  <div onmousemove="trackMouse(event)" style="width: 300px; height: 300px; background-color: lightgray;">
+    Move your mouse here
+  </div>
+  <p id="mousePosition"></p>
+
+  <hr>
+
+  <!-- 9. Form Submit with Validation -->
+  <form onsubmit="validateForm(event)">
+    <input type="text" id="requiredField" onchange="checkRequiredField()" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function showWelcomeMessage() {
+      alert("Welcome to the page!");
+    }
+
+    function updateParagraph() {
+      document.getElementById("outputText").textContent = document.getElementById("inputText").value;
+    }
+
+    function countClicks() {
+      let count = parseInt(document.getElementById("clickCount").textContent) + 1;
+      document.getElementById("clickCount").textContent = count;
+    }
+
+    function changeColor() {
+      document.querySelector(".hoverDiv").style.backgroundColor = "yellow";
+    }
+
+    function revertColor() {
+      document.querySelector(".hoverDiv").style.backgroundColor = "lightblue";
+    }
+
+    function logKey(event) {
+      console.log(event.key);
+    }
+
+    function imageLoaded() {
+      alert("Image Loaded!");
+    }
+
+    function displaySelectedValue() {
+      document.getElementById("selectedValue").textContent = document.querySelector("select").value;
+    }
+
+    function toggleVisibility() {
+      const box = document.getElementById("box");
+      box.classList.toggle("hidden");
+    }
+
+    function trackMouse(event) {
+      document.getElementById("mousePosition").textContent = `X: ${event.clientX}, Y: ${event.clientY}`;
+    }
+
+    function validateForm(event) {
+      const field = document.getElementById("requiredField");
+      if (!field.value) {
+        event.preventDefault();
+        alert("This field is required!");
+      }
+    }
+
+    function checkRequiredField() {
+      const field = document.getElementById("requiredField");
+      if (!field.value) {
+        alert("This field is required!");
+      }
+    }
+
+    document.getElementById("inputText").addEventListener("change", updateParagraph);
+  </script>
+
+</body>
+</html>

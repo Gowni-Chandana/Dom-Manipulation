@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Basics Example</title>
+  <style>
+    .highlight {
+      padding: 5px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Elements for testing -->
+  <h1>Welcome!</h1>
+  <p class="highlight">Paragraph 1</p>
+  <p class="highlight">Paragraph 2</p>
+  <p class="highlight">Paragraph 3</p>
+
+  <div id="demo">Original Content</div>
+
+  <script>
+    // 1. Select an element by ID
+    const demoDiv = document.getElementById("demo");
+
+    // 2. Difference: getElementsByClassName vs querySelectorAll
+    const classCollection = document.getElementsByClassName("highlight"); // live HTMLCollection
+    const nodeList = document.querySelectorAll(".highlight"); // static NodeList
+
+    // 3. Live HTMLCollection means it updates automatically if DOM changes
+    // (getElementsByClassName returns live collection, querySelectorAll does not)
+
+    // 4. Select all <p> tags
+    const allParagraphs = document.getElementsByTagName("p");
+
+    // 5. querySelector returns first match, querySelectorAll returns all
+    const firstP = document.querySelector("p"); // only first <p>
+    const allP = document.querySelectorAll("p"); // all <p>
+
+    // 6. Change content of element selected by ID
+    demoDiv.textContent = "Updated content via ID selection";
+
+    // 7. Select first <h1> and change color
+    const heading = document.querySelector("h1");
+    heading.style.color = "red";
+
+    // 8. Loop through elements selected by getElementsByClassName
+    for (let i = 0; i < classCollection.length; i++) {
+      classCollection[i].style.border = "1px solid gray";
+    }
+
+    // 9. querySelector returns null if no match
+    const missingElement = document.querySelector(".does-not-exist");
+    if (!missingElement) {
+      console.log("No element matched the selector.");
+    }
+
+    // 10. Select multiple elements by class and change background color
+    nodeList.forEach(el => {
+      el.style.backgroundColor = "#f0f8ff"; // light blue
+    });
+  </script>
+
+</body>
+</html>

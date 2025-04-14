@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Example</title>
+  </head>
+  <body>
+    <div id="container" class="box">Hello, World!</div>
+
+    <script>
+      // 1. Accessing the DOM
+      const container = document.getElementById("container");
+
+      // 2. The structure is: Document -> HTML -> Body -> Div (Element Node)
+
+      // 3. Difference between node and element
+      console.log(container.nodeType); // 1 = Element Node
+      console.log(container.nodeName); // DIV
+
+      // 4. Working with attributes
+      console.log(container.getAttribute("class")); // box
+      container.setAttribute("data-role", "main");
+
+      // 5. Text node inside the <div>
+      const textNode = container.firstChild;
+      console.log(textNode.nodeType); // 3 = Text Node
+      console.log(textNode.nodeValue); // "Hello, World!"
+    </script>
+  </body>
+</html>

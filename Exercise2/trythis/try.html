@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Tasks All-in-One</title>
+  <style>
+    .toggleBox {
+      margin: 5px 0;
+      padding: 10px;
+      background-color: lightgray;
+    }
+    .hidden {
+      display: none;
+    }
+    p {
+      padding: 5px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Highlight Element by ID -->
+  <h2 id="title">Original Title</h2>
+  <button onclick="changeTitle()">Change Title</button>
+
+  <hr>
+
+  <!-- 2. Count List Items -->
+  <h3>Shopping List</h3>
+  <ul id="shoppingList">
+    <li>Apples</li>
+    <li>Bananas</li>
+    <li>Carrots</li>
+  </ul>
+  <button onclick="countItems()">Count List Items</button>
+  <p id="itemCount"></p>
+
+  <hr>
+
+  <!-- 3. Toggle Class Elements -->
+  <div class="toggleBox">Box 1</div>
+  <div class="toggleBox">Box 2</div>
+  <div class="toggleBox">Box 3</div>
+  <button onclick="toggleVisibility()">Toggle Boxes</button>
+
+  <hr>
+
+  <!-- 4. Query Selector Magic -->
+  <div id="firstDiv">This is the first div.</div>
+  <div>This is another div.</div>
+  <button onclick="changeFirstDiv()">Change First Div</button>
+
+  <hr>
+
+  <!-- 5. Multi-Element Styling -->
+  <p>Paragraph A</p>
+  <p>Paragraph B</p>
+  <p>Paragraph C</p>
+  <button onclick="styleParagraphs()">Style Paragraphs</button>
+
+  <script>
+    // 1. Highlight Element by ID
+    function changeTitle() {
+      const title = document.getElementById("title");
+      title.textContent = "Title Changed!";
+    }
+
+    // 2. Count List Items
+    function countItems() {
+      const listItems = document.getElementsByTagName("li");
+      document.getElementById("itemCount").textContent = "Total items: " + listItems.length;
+    }
+
+    // 3. Toggle Class Elements
+    function toggleVisibility() {
+      const boxes = document.getElementsByClassName("toggleBox");
+      for (let i = 0; i < boxes.length; i++) {
+        boxes[i].classList.toggle("hidden");
+      }
+    }
+
+    // 4. Query Selector Magic
+    function changeFirstDiv() {
+      const firstDiv = document.querySelector("div");
+      firstDiv.textContent = "First <div> has been changed!";
+    }
+
+    // 5. Multi-Element Styling
+    function styleParagraphs() {
+      const paragraphs = document.querySelectorAll("p");
+      paragraphs.forEach(p => {
+        p.style.border = "1px solid blue";
+        p.style.backgroundColor = "#e6f7ff";
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Manipulation Tasks</title>
+  <style>
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Content Manipulation -->
+  <p id="contentPara">Original content</p>
+  <button onclick="manipulateContent()">Change Content</button>
+
+  <!-- 2. Attribute Handling -->
+  <a id="myLink" href="https://example.com" target="_blank">Visit Site</a>
+  <button onclick="changeLink()">Change Link</button>
+
+  <!-- 3. Dynamic Styling -->
+  <div id="hoverBox" style="width:150px; height:100px; background:#eee; margin:10px 0;"></div>
+
+  <!-- 4. Class Management -->
+  <span id="mySpan">This is a span</span>
+  <button onclick="addHighlight()">Add Highlight</button>
+  <button onclick="removeHighlight()">Remove Highlight</button>
+
+  <!-- 5. Text Resizer -->
+  <p id="resizeText" style="font-size:16px;">Resizable Text</p>
+  <button onclick="resizeText()">Increase Font Size</button>
+
+  <!-- 6. Toggle Visibility -->
+  <p id="togglePara">This paragraph can be hidden or shown.</p>
+  <button onclick="togglePara()">Toggle Paragraph</button>
+
+  <!-- 7. Form Feedback -->
+  <input type="text" oninput="updateLiveText(this.value)" placeholder="Type something...">
+  <p id="liveText">Waiting for input...</p>
+
+  <!-- 8. Attribute Checker -->
+  <img id="myImg" src="https://via.placeholder.com/100">
+  <button onclick="checkAlt()">Check Alt</button>
+
+  <!-- 9. Reset Styles -->
+  <div id="styledBox" style="color: red; background: pink; padding: 10px;">Styled Box</div>
+  <button onclick="resetStyles()">Reset Styles</button>
+
+  <!-- 10. Interactive Heading -->
+  <h1 id="mainHeading" onclick="interactHeading()">Click Me Heading</h1>
+
+  <script>
+    function manipulateContent() {
+      const para = document.getElementById("contentPara");
+      para.innerHTML = "<strong>Changed with innerHTML</strong>";
+      setTimeout(() => para.innerText = "Changed with innerText", 1500);
+      setTimeout(() => para.textContent = "Changed with textContent", 3000);
+    }
+
+    function changeLink() {
+      const link = document.getElementById("myLink");
+      link.href = "https://webplusacademy.com";
+      link.textContent = "Visit WebPlus Academy";
+    }
+
+    const hoverBox = document.getElementById("hoverBox");
+    hoverBox.addEventListener("mouseover", () => hoverBox.style.backgroundColor = "#cde");
+    hoverBox.addEventListener("mouseout", () => hoverBox.style.backgroundColor = "#eee");
+
+    function addHighlight() {
+      document.getElementById("mySpan").classList.add("highlight");
+    }
+
+    function removeHighlight() {
+      document.getElementById("mySpan").classList.remove("highlight");
+    }
+
+    function resizeText() {
+      const el = document.getElementById("resizeText");
+      const currentSize = parseInt(window.getComputedStyle(el).fontSize);
+      el.style.fontSize = (currentSize + 2) + "px";
+    }
+
+    function togglePara() {
+      const p = document.getElementById("togglePara");
+      p.style.display = (p.style.display === "none") ? "block" : "none";
+    }
+
+    function updateLiveText(value) {
+      document.getElementById("liveText").textContent = value;
+    }
+
+    function checkAlt() {
+      const img = document.getElementById("myImg");
+      if (!img.hasAttribute("alt")) {
+        img.setAttribute("alt", "Placeholder image");
+      }
+    }
+
+    function resetStyles() {
+      const box = document.getElementById("styledBox");
+      box.removeAttribute("style");
+    }
+
+    function interactHeading() {
+      const heading = document.getElementById("mainHeading");
+      heading.textContent = "Heading Clicked!";
+      heading.style.border = "2px solid black";
+      heading.style.padding = "10px";
+    }
+  </script>
+
+</body>
+</html>

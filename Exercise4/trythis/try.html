@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .dark-mode {
+      background-color: #333;
+      color: white;
+    }
+    .gallery img {
+      width: 100px;
+      cursor: pointer;
+    }
+    #mainImage {
+      width: 300px;
+      height: 200px;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="liveClock"></div>
+
+  <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+
+  <div class="gallery">
+    <img src="https://via.placeholder.com/100" alt="Thumbnail 1" onclick="changeImage('https://via.placeholder.com/300')">
+    <img src="https://via.placeholder.com/100" alt="Thumbnail 2" onclick="changeImage('https://via.placeholder.com/300/0000FF')">
+    <img src="https://via.placeholder.com/100" alt="Thumbnail 3" onclick="changeImage('https://via.placeholder.com/300/FF0000')">
+  </div>
+  <img id="mainImage" src="https://via.placeholder.com/300">
+
+  <ul id="interactiveList">
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+  <button onclick="addItem()">Add Item</button>
+  <button onclick="removeItem()">Remove Item</button>
+
+  <textarea id="textArea" oninput="updateCharacterCount()"></textarea>
+  <p id="charCount">Character Count: 0</p>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("liveClock").textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function changeImage(src) {
+      document.getElementById("mainImage").src = src;
+    }
+
+    function addItem() {
+      const ul = document.getElementById("interactiveList");
+      const li = document.createElement("li");
+      li.textContent = "New Item";
+      ul.appendChild(li);
+    }
+
+    function removeItem() {
+      const ul = document.getElementById("interactiveList");
+      if (ul.children.length > 0) {
+        ul.removeChild(ul.lastChild);
+      }
+    }
+
+    function updateCharacterCount() {
+      const count = document.getElementById("textArea").value.length;
+      document.getElementById("charCount").textContent = "Character Count: " + count;
+    }
+  </script>
+
+</body>
+</html>

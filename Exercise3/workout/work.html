@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Traversal Example</title>
+  <style>
+    section > * {
+      margin: 5px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>DOM Traversal Demo</h2>
+
+  <!-- Example structure -->
+  <div id="parentDiv">
+    <ul id="myList">
+      <li>Item 1</li>
+      <li>Item 2</li>
+    </ul>
+    <p>Paragraph inside div</p>
+  </div>
+
+  <section id="mySection">
+    <div>Section Child 1</div>
+    <div>Section Child 2</div>
+    <div>Section Child 3</div>
+  </section>
+
+  <button onclick="runDOMTasks()">Run DOM Traversal Tasks</button>
+
+  <script>
+    function runDOMTasks() {
+      // 1. parentNode vs parentElement
+      const ul = document.getElementById("myList");
+      console.log("parentNode:", ul.parentNode);     // can be any node (element, text, etc.)
+      console.log("parentElement:", ul.parentElement); // only returns an element
+
+      // 2. Get all child elements of a parent
+      const parent = document.getElementById("parentDiv");
+      console.log("Children of #parentDiv:", parent.children); // HTMLCollection
+
+      // 3. Select parent of <ul>
+      const ulParent = ul.parentElement;
+      console.log("Parent of <ul>:", ulParent);
+
+      // 4. childNodes vs children
+      console.log("childNodes (includes text):", parent.childNodes); // includes text nodes
+      console.log("children (only elements):", parent.children);     // only element nodes
+
+      // 5. Access first and last child elements
+      const firstChild = parent.firstElementChild;
+      const lastChild = parent.lastElementChild;
+      console.log("First child:", firstChild);
+      console.log("Last child:", lastChild);
+
+      // 6. Count number of child elements inside a <div>
+      function countDivChildren(divId) {
+        const div = document.getElementById(divId);
+        return div.children.length;
+      }
+      console.log("Children inside #parentDiv:", countDivChildren("parentDiv"));
+
+      // 7. Access next and previous sibling elements
+      const paragraph = parent.querySelector("p");
+      console.log("Previous sibling of <p>:", paragraph.previousElementSibling);
+      console.log("Next sibling of <ul>:", ul.nextElementSibling);
+
+      // 8. Can a text node be a child node?
+      // Yes! childNodes includes text nodes like whitespace and newlines
+      console.log("Text nodes in childNodes:", parent.childNodes);
+
+      // 9. Loop through all child elements
+      for (let child of parent.children) {
+        console.log("Loop child:", child.tagName);
+      }
+
+      // 10. Change background color of all direct children of <section>
+      const section = document.getElementById("mySection");
+      for (let child of section.children) {
+        child.style.backgroundColor = "#d1f0ff";
+      }
+    }
+  </script>
+
+</body>
+</html>

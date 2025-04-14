@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Parent/Child/Sibling Demo</title>
+  <style>
+    .box {
+      margin: 5px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    nav > * {
+      margin: 5px;
+      padding: 5px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Parent Finder -->
+  <div id="paragraphWrapper">
+    <p id="myParagraph">I am a paragraph inside a div.</p>
+  </div>
+  <button onclick="findParent()">Find Paragraph's Parent</button>
+
+  <hr>
+
+  <!-- 2. Child Highlighter -->
+  <div id="highlightDiv">
+    <div class="box">Child 1</div>
+    <div class="box">Child 2</div>
+    <div class="box">Child 3</div>
+  </div>
+  <button onclick="highlightChildren()">Highlight Children</button>
+
+  <hr>
+
+  <!-- 3. Count the Children -->
+  <ul id="myList">
+    <li>Item A</li>
+    <li>Item B</li>
+    <li>Item C</li>
+  </ul>
+  <button onclick="countListChildren()">Count List Items</button>
+  <p id="listCount"></p>
+
+  <hr>
+
+  <!-- 4. First and Last Child -->
+  <nav id="mainNav">
+    <span>Home</span>
+    <span>About</span>
+    <span>Contact</span>
+  </nav>
+  <button onclick="colorFirstLast()">Color First & Last</button>
+
+  <hr>
+
+  <!-- 5. Sibling Navigation -->
+  <div id="siblingGroup">
+    <p>Sibling 1</p>
+    <p id="middleSibling">Sibling 2</p>
+    <p>Sibling 3</p>
+  </div>
+  <button onclick="showSiblings()">Show Sibling Content</button>
+
+  <script>
+    // 1. Parent Finder
+    function findParent() {
+      const para = document.getElementById("myParagraph");
+      console.log("Parent of <p>:", para.parentElement);
+    }
+
+    // 2. Child Highlighter
+    function highlightChildren() {
+      const parent = document.getElementById("highlightDiv");
+      for (let child of parent.children) {
+        child.style.border = "2px solid blue";
+      }
+    }
+
+    // 3. Count the Children
+    function countListChildren() {
+      const list = document.getElementById("myList");
+      const count = list.children.length;
+      document.getElementById("listCount").textContent = "List contains " + count + " items.";
+    }
+
+    // 4. First and Last Child Styling
+    function colorFirstLast() {
+      const nav = document.getElementById("mainNav");
+      nav.firstElementChild.style.color = "green";
+      nav.lastElementChild.style.color = "red";
+    }
+
+    // 5. Sibling Navigation
+    function showSiblings() {
+      const middle = document.getElementById("middleSibling");
+      const prev = middle.previousElementSibling;
+      const next = middle.nextElementSibling;
+      alert("Previous: " + prev.textContent + "\nNext: " + next.textContent);
+    }
+  </script>
+
+</body>
+</html>

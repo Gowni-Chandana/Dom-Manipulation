@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Tasks</title>
+  <style>
+    .carousel img { width: 200px; height: 150px; }
+    .draggable { width: 100px; height: 100px; background-color: lightblue; position: absolute; cursor: move; }
+    .dark-mode { background-color: black; color: white; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Dark Mode Toggle -->
+  <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+  <hr>
+
+  <!-- 2. Image Carousel with Events -->
+  <div id="carousel">
+    <img src="https://via.placeholder.com/200x150/FF0000" alt="Image 1">
+  </div>
+  <button onclick="nextImage()">Next</button>
+  <button onclick="prevImage()">Previous</button>
+
+  <hr>
+
+  <!-- 3. Drag and Drop -->
+  <div class="draggable" id="dragElement" onmousedown="startDrag(event)"></div>
+
+  <hr>
+
+  <!-- 4. Form Validation -->
+  <form id="myForm">
+    <input type="text" id="name" placeholder="Enter name">
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <!-- 5. Countdown Timer -->
+  <div id="timer">10</div>
+  <button onclick="startCountdown()">Start</button>
+  <button onclick="stopCountdown()">Stop</button>
+
+  <script>
+    let currentImage = 0;
+    const images = [
+      "https://via.placeholder.com/200x150/FF0000",
+      "https://via.placeholder.com/200x150/00FF00",
+      "https://via.placeholder.com/200x150/0000FF"
+    ];
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function nextImage() {
+      currentImage = (currentImage + 1) % images.length;
+      document.querySelector("#carousel img").src = images[currentImage];
+    }
+
+    function prevImage() {
+      currentImage = (currentImage - 1 + images.length) % images.length;
+      document.querySelector("#carousel img").src = images[currentImage];
+    }
+
+    function startDrag(e) {
+      let offsetX = e.clientX - document.getElementById("dragElement").offsetLeft;
+      let offsetY = e.clientY - document.getElementById("dragElement").offsetTop;
+      
+      function dragMove(e) {
+        document.getElementById("dragElement").style.left = e.clientX - offsetX + "px";
+        document.getElementById("dragElement").style.top = e.clientY - offsetY + "px";
+      }
+
+      function stopDrag() {
+        document.removeEventListener("mousemove", dragMove);
+        document.removeEventListener("mouseup", stopDrag);
+      }
+
+      document.addEventListener("mousemove", dragMove);
+      document.addEventListener("mouseup", stopDrag);
+    }
+
+    document.getElementById("name").addEventListener("blur", function() {
+      if (this.value === "") alert("Name is required!");
+    });
+
+    document.getElementById("name").addEventListener("input", function() {
+      if (this.value.length < 3) alert("Name must be at least 3 characters.");
+    });
+
+    let countdown;
+    let timeLeft = 10;
+    function startCountdown() {
+      countdown = setInterval(function() {
+        document.getElementById("timer").textContent = timeLeft;
+        timeLeft--;
+        if (timeLeft < 0) clearInterval(countdown);
+      }, 1000);
+    }
+
+    function stopCountdown() {
+      clearInterval(countdown);
+    }
+  </script>
+
+</body>
+</html>

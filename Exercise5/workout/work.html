@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Manipulation Tasks</title>
+  <style>
+    .card { border: 1px solid black; padding: 10px; margin: 5px; }
+    .todo { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Create a New Element -->
+  <div id="container"></div>
+  <button onclick="createElement()">Create New Element</button>
+
+  <hr>
+
+  <!-- 2. Append a List Item -->
+  <ul id="myList">
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+  <button onclick="appendListItem()">Add Item</button>
+
+  <hr>
+
+  <!-- 3. Remove a Specific Element -->
+  <ul id="myListToRemove">
+    <li>Item A</li>
+    <li>Item B</li>
+  </ul>
+  <button onclick="removeLastItem()">Remove Last Item</button>
+
+  <hr>
+
+  <!-- 4. Clone an Element -->
+  <div id="cloneDiv">
+    <p>Original Div</p>
+  </div>
+  <button onclick="cloneElement()">Clone Div</button>
+
+  <hr>
+
+  <!-- 5. Create a Dynamic Table -->
+  <button onclick="createTable()">Create Table</button>
+
+  <hr>
+
+  <!-- 6. Toggle a Message -->
+  <button onclick="toggleMessage()">Toggle Message</button>
+
+  <hr>
+
+  <!-- 7. Move an Element -->
+  <div id="moveDiv">
+    <h1>Move me!</h1>
+  </div>
+  <div id="newContainer"></div>
+  <button onclick="moveElement()">Move Element</button>
+
+  <hr>
+
+  <!-- 8. Create a Countdown Timer -->
+  <div id="countdown"></div>
+
+  <hr>
+
+  <!-- 9. Dynamically Add and Remove Cards -->
+  <div id="cardContainer"></div>
+  <button onclick="addCard()">Add Card</button>
+  <button onclick="removeCard()">Remove Card</button>
+
+  <hr>
+
+  <!-- 10. Build a Todo List -->
+  <ul id="todoList"></ul>
+  <input type="text" id="todoInput" placeholder="New Task">
+  <button onclick="addTodo()">Add Task</button>
+
+  <script>
+    function createElement() {
+      const p = document.createElement("p");
+      p.textContent = "Hello, World!";
+      document.getElementById("container").appendChild(p);
+    }
+
+    function appendListItem() {
+      const li = document.createElement("li");
+      li.textContent = "New Item";
+      document.getElementById("myList").appendChild(li);
+    }
+
+    function removeLastItem() {
+      const list = document.getElementById("myListToRemove");
+      list.removeChild(list.lastChild);
+    }
+
+    function cloneElement() {
+      const div = document.getElementById("cloneDiv");
+      const clone = div.cloneNode(true);
+      document.body.appendChild(clone);
+    }
+
+    function createTable() {
+      const table = document.createElement("table");
+      for (let i = 0; i < 3; i++) {
+        const row = table.insertRow();
+        for (let j = 0; j < 3; j++) {
+          const cell = row.insertCell();
+          cell.textContent = `Row ${i + 1} Col ${j + 1}`;
+        }
+      }
+      document.body.appendChild(table);
+    }
+
+    function toggleMessage() {
+      const message = document.createElement("p");
+      message.textContent = "Click to remove me";
+      const button = document.querySelector("button[onclick='toggleMessage()']");
+      if (!document.getElementById("message")) {
+        message.id = "message";
+        document.body.appendChild(message);
+      } else {
+        document.body.removeChild(document.getElementById("message"));
+      }
+    }
+
+    function moveElement() {
+      const h1 = document.querySelector("#moveDiv h1");
+      document.getElementById("newContainer").appendChild(h1);
+    }
+
+    function countdown() {
+      let timeLeft = 10;
+      const countdownDiv = document.getElementById("countdown");
+      const timer = setInterval(() => {
+        countdownDiv.textContent = timeLeft;
+        timeLeft--;
+        if (timeLeft < 0) clearInterval(timer);
+      }, 1000);
+    }
+    countdown();
+
+    function addCard() {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.textContent = "New Card";
+      document.getElementById("cardContainer").appendChild(card);
+    }
+
+    function removeCard() {
+      const cardContainer = document.getElementById("cardContainer");
+      if (cardContainer.children.length > 0) {
+        cardContainer.removeChild(cardContainer.lastChild);
+      }
+    }
+
+    function addTodo() {
+      const input = document.getElementById("todoInput");
+      if (input.value.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = input.value;
+        document.getElementById("todoList").appendChild(li);
+        input.value = "";
+      }
+    }
+  </script>
+
+</body>
+</html>

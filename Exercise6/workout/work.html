@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Handling Tasks</title>
+  <style>
+    .box { width: 100px; height: 100px; background-color: lightblue; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Button Click Event -->
+  <p id="text">Old Text</p>
+  <button onclick="changeText()">Change Text</button>
+
+  <hr>
+
+  <!-- 2. Mouse Over and Out -->
+  <div id="hoverDiv" style="width:100px;height:100px;background-color:lightgray;"></div>
+
+  <hr>
+
+  <!-- 3. Prevent Default Action -->
+  <form id="myForm">
+    <input type="text">
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <!-- 4. Key Press Logger -->
+  <input type="text" id="keyPressInput">
+
+  <hr>
+
+  <!-- 5. Toggle Visibility -->
+  <p id="togglePara">This is a paragraph.</p>
+  <button onclick="toggleVisibility()">Toggle Visibility</button>
+
+  <hr>
+
+  <!-- 6. Dynamic Event Removal -->
+  <button id="clickButton">Click me 3 times</button>
+
+  <hr>
+
+  <!-- 7. Event Delegation -->
+  <ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+
+  <hr>
+
+  <!-- 8. Stopping Propagation -->
+  <div id="outerDiv" style="width:200px;height:200px;background-color:lightgreen;">
+    <div id="innerDiv" style="width:100px;height:100px;background-color:lightblue;"></div>
+  </div>
+
+  <hr>
+
+  <!-- 9. Count Button Clicks -->
+  <button id="clickCounter">Click Me</button>
+  <p id="clickCount">0</p>
+
+  <hr>
+
+  <!-- 10. Keyboard Navigation -->
+  <div id="moveBox" class="box"></div>
+
+  <script>
+    function changeText() {
+      document.getElementById("text").textContent = "New Text";
+    }
+
+    document.getElementById("hoverDiv").addEventListener("mouseover", function() {
+      this.style.backgroundColor = "yellow";
+    });
+    document.getElementById("hoverDiv").addEventListener("mouseout", function() {
+      this.style.backgroundColor = "lightgray";
+    });
+
+    document.getElementById("myForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Form submission prevented");
+    });
+
+    document.getElementById("keyPressInput").addEventListener("keypress", function(e) {
+      console.log(e.key);
+    });
+
+    function toggleVisibility() {
+      var para = document.getElementById("togglePara");
+      para.style.display = para.style.display === "none" ? "block" : "none";
+    }
+
+    let clickCount = 0;
+    document.getElementById("clickButton").addEventListener("click", function() {
+      clickCount++;
+      if (clickCount === 3) {
+        this.removeEventListener("click", arguments.callee);
+      }
+    });
+
+    document.getElementById("list").addEventListener("click", function(e) {
+      if (e.target.tagName === "LI") {
+        alert(e.target.textContent);
+      }
+    });
+
+    document.getElementById("innerDiv").addEventListener("click", function(e) {
+      e.stopPropagation();
+      alert("Inner div clicked");
+    });
+    document.getElementById("outerDiv").addEventListener("click", function() {
+      alert("Outer div clicked");
+    });
+
+    let count = 0;
+    document.getElementById("clickCounter").addEventListener("click", function() {
+      count++;
+      document.getElementById("clickCount").textContent = count;
+    });
+
+    document.addEventListener("keydown", function(e) {
+      const box = document.getElementById("moveBox");
+      let left = box.offsetLeft;
+      let top = box.offsetTop;
+      if (e.key === "ArrowLeft") box.style.left = left - 10 + "px";
+      if (e.key === "ArrowRight") box.style.left = left + 10 + "px";
+      if (e.key === "ArrowUp") box.style.top = top - 10 + "px";
+      if (e.key === "ArrowDown") box.style.top = top + 10 + "px";
+    });
+  </script>
+
+</body>
+</html>

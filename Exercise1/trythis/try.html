@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All in One DOM Demo</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    p { margin: 10px 0; }
+    ul { list-style: disc; padding-left: 20px; }
+    button { margin: 5px; }
+    img { width: 200px; height: auto; margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Highlight Paragraphs -->
+  <h2>1. Highlight Paragraphs</h2>
+  <p>This is paragraph one.</p>
+  <p>This is paragraph two.</p>
+  <p>This is paragraph three.</p>
+  <button onclick="highlightParagraphs()">Highlight Paragraphs</button>
+
+  <!-- 2. Image Gallery -->
+  <h2>2. Image Gallery</h2>
+  <img id="galleryImage" src="https://via.placeholder.com/200x150?text=Image+1" alt="Gallery Image">
+  <br>
+  <button onclick="changeImage(1)">Image 1</button>
+  <button onclick="changeImage(2)">Image 2</button>
+  <button onclick="changeImage(3)">Image 3</button>
+
+  <!-- 3. To-Do List -->
+  <h2>3. To-Do List</h2>
+  <input type="text" id="todoInput" placeholder="Enter task">
+  <button onclick="addTodo()">Add Task</button>
+  <ul id="todoList"></ul>
+
+  <!-- 4. Dynamic Heading -->
+  <h2>4. Dynamic Heading</h2>
+  <h1 id="dynamicHeading">Hover over me!</h1>
+
+  <!-- 5. Attribute Changer -->
+  <h2>5. Attribute Changer</h2>
+  <a id="myLink" href="https://example.com" target="_blank">Visit Example</a>
+  <br>
+  <button onclick="changeLink()">Change Link</button>
+
+  <script>
+    // 1. Highlight Paragraphs
+    function highlightParagraphs() {
+      const paragraphs = document.querySelectorAll("p");
+      paragraphs.forEach(p => {
+        p.style.backgroundColor = "yellow";
+      });
+    }
+
+    // 2. Image Gallery
+    function changeImage(number) {
+      const img = document.getElementById("galleryImage");
+      img.src = `https://via.placeholder.com/200x150?text=Image+${number}`;
+    }
+
+    // 3. To-Do List
+    function addTodo() {
+      const input = document.getElementById("todoInput");
+      const list = document.getElementById("todoList");
+      const task = input.value.trim();
+      if (task) {
+        const li = document.createElement("li");
+        li.textContent = task;
+        list.appendChild(li);
+        input.value = "";
+      }
+    }
+
+    // 4. Dynamic Heading
+    const heading = document.getElementById("dynamicHeading");
+    heading.addEventListener("mouseover", () => {
+      heading.textContent = "You hovered over me!";
+    });
+    heading.addEventListener("mouseout", () => {
+      heading.textContent = "Hover over me!";
+    });
+
+    // 5. Attribute Changer
+    function changeLink() {
+      const link = document.getElementById("myLink");
+      link.href = "https://www.google.com";
+      link.textContent = "Go to Google";
+    }
+  </script>
+
+</body>
+</html>

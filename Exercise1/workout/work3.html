@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Actions</title>
+</head>
+<body>
+
+  <h2 id="header">Hello!</h2>
+  <div id="container">
+    <p>This is the container.</p>
+  </div>
+  <button id="addBtn">Add Paragraph</button>
+  <button id="removeBtn">Remove Header</button>
+
+  <script>
+    // 11. Create a new element
+    const newParagraph = document.createElement("p");
+    newParagraph.textContent = "This is a new paragraph.";
+
+    // 12. Add the new element to an existing one
+    const container = document.getElementById("container");
+    document.getElementById("addBtn").addEventListener("click", function() {
+      container.appendChild(newParagraph);
+    });
+
+    // 13. Remove an element from the DOM
+    const header = document.getElementById("header");
+    document.getElementById("removeBtn").addEventListener("click", function() {
+      header.remove(); // or container.removeChild(header) if needed
+    });
+
+    // 14. Change the style of an element
+    container.style.backgroundColor = "#f0f0f0";
+    container.style.padding = "10px";
+
+    // 15. Handle user interaction (button clicks handled above)
+  </script>
+
+</body>
+</html>
